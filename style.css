@@ -97,3 +97,60 @@ th,td{
 padding:15px;
 border:1px solid rgba(255,255,255,.2);
 }
+
+/* Handy-Support */
+
+@media (max-width: 768px){
+
+nav{
+flex-wrap:wrap;
+gap:10px;
+padding:15px;
+}
+
+nav a{
+font-size:14px;
+}
+
+.hero{
+padding:40px 15px;
+}
+
+.hero h1{
+font-size:2rem;
+}
+
+.cards{
+grid-template-columns:1fr;
+padding:20px;
+}
+
+.page{
+margin:20px 10px;
+padding:20px;
+}
+
+table{
+display:block;
+overflow-x:auto;
+white-space:nowrap;
+}
+
+h1{
+font-size:2rem;
+}
+
+h2{
+font-size:1.3rem;
+}
+
+p,li,td,th{
+font-size:1rem;
+line-height:1.5;
+}
+
+.glass{
+padding:20px;
+}
+
+}
