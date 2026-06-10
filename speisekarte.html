@@ -2,21 +2,85 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Speisekarte</title>
-<link rel="stylesheet" href="style.css">
+<title>Speisekarte der Antike</title>
+
+<style>
+
+body{
+background:#c8b07a;
+background-image:
+radial-gradient(circle at 20% 20%,rgba(255,255,255,.25),transparent 30%),
+radial-gradient(circle at 80% 70%,rgba(0,0,0,.1),transparent 30%);
+font-family:"Times New Roman",serif;
+padding:40px;
+}
+
+.pergament{
+max-width:900px;
+margin:auto;
+background:#e6d3a3;
+padding:50px;
+border-radius:10px;
+box-shadow:
+0 0 30px rgba(0,0,0,.4),
+inset 0 0 50px rgba(120,80,20,.2);
+border:8px solid #8b6a3d;
+}
+
+h1{
+text-align:center;
+font-size:3rem;
+color:#5a3d1c;
+margin-bottom:30px;
+}
+
+.subtitle{
+text-align:center;
+font-style:italic;
+margin-bottom:30px;
+color:#6b4f2a;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#8b6a3d;
+color:white;
+padding:15px;
+font-size:1.2rem;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid #8b6a3d;
+}
+
+tr:hover{
+background:rgba(139,106,61,.15);
+}
+
+.footer{
+margin-top:40px;
+text-align:center;
+font-style:italic;
+color:#6b4f2a;
+}
+
+</style>
 </head>
+
 <body>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="rom.html">Rom</a>
-<a href="athen.html">Athen</a>
-<a href="speisekarte.html">Speisekarte</a>
-</nav>
+<div class="pergament">
 
-<div class="page glass">
+<h1>🍇 Taberna Antiqua 🍇</h1>
 
-<h1>🍇 Speisekarte der Antike</h1>
+<p class="subtitle">
+Speisen aus dem antiken Rom und Athen
+</p>
 
 <table>
 
@@ -26,36 +90,42 @@
 </tr>
 
 <tr>
-<td>Brot & Oliven</td>
-<td>Griechenland</td>
+<td>🥖 Brot & Oliven</td>
+<td>Athen</td>
 </tr>
 
 <tr>
-<td>Fisch mit Kräutern</td>
-<td>Griechenland</td>
+<td>🐟 Fisch mit Kräutern</td>
+<td>Athen</td>
 </tr>
 
 <tr>
-<td>Feigen</td>
-<td>Beide</td>
-</tr>
-
-<tr>
-<td>Trauben</td>
-<td>Beide</td>
-</tr>
-
-<tr>
-<td>Honigkuchen</td>
+<td>🧀 Moretum (Kräuterkäse)</td>
 <td>Rom</td>
 </tr>
 
 <tr>
-<td>Moretum</td>
+<td>🍇 Feigen & Trauben</td>
+<td>Beide</td>
+</tr>
+
+<tr>
+<td>🍯 Honigkuchen</td>
 <td>Rom</td>
+</tr>
+
+<tr>
+<td>🥜 Nüsse & Datteln</td>
+<td>Beide</td>
 </tr>
 
 </table>
+
+<div class="footer">
+"Bonum cibum, bona vita."
+<br>
+(Gutes Essen, gutes Leben)
+</div>
 
 </div>
 
