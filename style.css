@@ -2,14 +2,14 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
-min-height:100vh;
 background:
 linear-gradient(135deg,#0f172a,#1e293b,#334155);
 color:white;
+min-height:100vh;
 }
 
 nav{
@@ -17,13 +17,15 @@ display:flex;
 justify-content:center;
 gap:20px;
 padding:20px;
-backdrop-filter:blur(20px);
+
 background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
 }
 
 nav a{
 color:white;
 text-decoration:none;
+font-weight:bold;
 }
 
 .hero{
@@ -33,11 +35,13 @@ padding:80px 20px;
 
 .hero h1{
 font-size:4rem;
+margin-bottom:20px;
 }
 
-.container{
+.cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
 gap:30px;
 padding:40px;
 }
@@ -52,15 +56,44 @@ transition:.3s;
 }
 
 .glass:hover{
-transform:translateY(-8px);
+transform:translateY(-10px);
 }
 
-button,a{
+.glass a{
 display:inline-block;
 margin-top:15px;
 padding:10px 20px;
-border-radius:15px;
 background:white;
 color:black;
+border-radius:12px;
 text-decoration:none;
+}
+
+.page{
+max-width:1000px;
+margin:40px auto;
+}
+
+.page h1{
+margin-bottom:20px;
+}
+
+.page h2{
+margin-top:25px;
+margin-bottom:10px;
+}
+
+.page ul{
+margin-left:25px;
+}
+
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+}
+
+th,td{
+padding:15px;
+border:1px solid rgba(255,255,255,.2);
 }
