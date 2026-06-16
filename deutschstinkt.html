@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Geometry Dash Mini</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:#111;
+}
+
+canvas{
+    display:block;
+    width:100vw;
+    height:100vh;
+}
+
+#ui{
+    position:absolute;
+    top:15px;
+    width:100%;
+    text-align:center;
+    color:white;
+    font-family:Arial;
+    font-size:28px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div id="ui">Tippen/Klicken/Leertaste</div>
+<canvas id="game"></canvas>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+}
+resize();
+addEventListener("resize", resize);
+
+const gravity = 0.8;
+const jumpPower = -16;
+const speed = 7;
+
+let score;
+let started;
+let gameOver;
+let player;
+let obstacles;
+
+function reset(){
+
+    player = {
+        x:100,
+        y:0,
+        size:40,
+        velY:0,
+        rotation:0
+    };
+
+    score = 0;
+    started = false;
+    gameOver = false;
+
+    obstacles = [];
+
+    document.getElementById("ui").innerHTML =
+        "Tippen/Klicken/Leertaste";
+}
+
+reset();
+
+function groundY(){
+    return canvas.height - 120;
+}
+
+function jump(){
+
+    if(gameOver){
+        reset();
+        return;
+    }
+
+    started = true;
+    player.velY = jumpPower;
+}
+
+addEventListener("keydown", e=>{
+    if(e.code==="Space"){
+        e.preventDefault();
+        jump();
+    }
+});
+
+canvas.addEventListener("mousedown", jump);
+
+canvas.addEventListener("touchstart", e=>{
+    e.preventDefault();
+    jump();
+});
+
+function spawnObstacle(){
+
+    obstacles.push({
+        x:canvas.width + 50,
+        width:40,
+        height:50 + Math.random()*80
+    });
+}
+
+setInterval(()=>{
+    if(started && !gameOver){
+        spawnObstacle();
+    }
+},1300);
+
+function collision(a,b){
+
+    return (
+        a.x < b.x+b.width &&
+        a.x+a.size > b.x &&
+        a.y < b.y+b.height &&
+        a.y+a.size > b.y
+    );
+}
+
+function update(){
+
+    if(!started || gameOver) return;
+
+    player.velY += gravity;
+    player.y += player.velY;
+
+    const floor = groundY()-player.size;
+
+    if(player.y > floor){
+        player.y = floor;
+        player.velY = 0;
+    }
+
+    player.rotation += 0.12;
+
+    for(let i=obstacles.length-1;i>=0;i--){
+
+        const o = obstacles[i];
+
+        o.x -= speed;
+
+        const hitbox = {
+            x:o.x,
+            y:groundY()-o.height,
+            width:o.width,
+            height:o.height
+        };
+
+        if(collision(player, hitbox)){
+            gameOver = true;
+
+            document.getElementById("ui").innerHTML =
+                "Game Over<br>Score: "+score+
+                "<br>Tippen zum Neustart";
+        }
+
+        if(o.x + o.width < 0){
+            obstacles.splice(i,1);
+            score++;
+        }
+    }
+
+    document.getElementById("ui").innerHTML =
+        gameOver
+        ? document.getElementById("ui").innerHTML
+        : score;
+}
+
+function draw(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle="#222";
+    ctx.fillRect(
+        0,
+        groundY(),
+        canvas.width,
+        canvas.height-groundY()
+    );
+
+    obstacles.forEach(o=>{
+
+        ctx.fillStyle="#ff0055";
+
+        ctx.beginPath();
+        ctx.moveTo(o.x, groundY());
+        ctx.lineTo(o.x+o.width/2, groundY()-o.height);
+        ctx.lineTo(o.x+o.width, groundY());
+        ctx.fill();
+    });
+
+    ctx.save();
+
+    ctx.translate(
+        player.x+player.size/2,
+        player.y+player.size/2
+    );
+
+    ctx.rotate(player.rotation);
+
+    ctx.fillStyle="#00ffff";
+
+    ctx.fillRect(
+        -player.size/2,
+        -player.size/2,
+        player.size,
+        player.size
+    );
+
+    ctx.restore();
+}
+
+function loop(){
+
+    update();
+    draw();
+
+    requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+
+</body>
+</html>
